@@ -1,6 +1,8 @@
 // ToDo List
 // TODO: $5 + 10 CHF = $10
 // TODO: Moneyの丸目処理どうする？
+// TODO: equals()
+// TODO: hashCode()
 
 #[derive(Debug)]
 pub struct Doller {
