@@ -1,28 +1,35 @@
 #[derive(Debug)]
-pub struct Doller {
+pub struct Money {
     amount: u32,
 }
 
-pub struct Franc {
+trait MoneyTrait {
+    fn new(amount: u32) -> Money;
+}
+
+pub struct Doller {}
+
+struct Franc {
     amount: u32,
 }
 
-impl Doller {
-    /// Create a Doller instance.
-    pub fn new(amount: u32) -> Doller {
-        Self { amount }
-    }
-
+impl Money {
     /// Calculate multiplication with the entered multiples.
-    pub fn times(&mut self, multiplier: u32) -> Doller {
-        Doller {
+    pub fn times(&self, multiplier: u32) -> Money {
+        Money {
             amount: self.amount * multiplier,
         }
     }
-
     /// Check the equivalent.
-    pub fn equals(&self, other: Doller) -> bool {
-        self.amount == other.amount
+    pub fn equals(&self, target: Money) -> bool {
+        self.amount == target.amount
+    }
+}
+
+impl MoneyTrait for Doller {
+    /// Create a Doller instance.
+    fn new(amount: u32) -> Money {
+        Money { amount }
     }
 }
 
@@ -52,7 +59,7 @@ mod tests {
     #[test]
     fn test_multiplication() {
         // n倍した合計値を確認する
-        let mut five = Doller::new(5);
+        let five = Doller::new(5);
         assert!(Doller::new(10).equals(five.times(2)));
         assert!(Doller::new(15).equals(five.times(3)));
     }
