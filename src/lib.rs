@@ -1,14 +1,9 @@
-// ToDo List
-// TODO: $5 + 10 CHF = $10(レートが2:1の場合)
-// TODO: Moneyの丸目処理どうする？
-// DONE: amountをprivateにする。
-// DONE: equals()
-// TODO: hashCode()
-// TODO: nullとの等価性比較
-// TODO: 他オブジェクトとの等価性比較
-
 #[derive(Debug)]
 pub struct Doller {
+    amount: u32,
+}
+
+pub struct Franc {
     amount: u32,
 }
 
@@ -27,6 +22,25 @@ impl Doller {
 
     /// Check the equivalent.
     pub fn equals(&self, other: Doller) -> bool {
+        self.amount == other.amount
+    }
+}
+
+impl Franc {
+    /// Create a Doller instance.
+    pub fn new(amount: u32) -> Franc {
+        Franc { amount }
+    }
+
+    /// Calculate multiplication with the entered multiples.
+    pub fn times(&mut self, multiplier: u32) -> Franc {
+        Franc {
+            amount: self.amount * multiplier,
+        }
+    }
+
+    /// Check the equivalent.
+    pub fn equals(&self, other: Franc) -> bool {
         self.amount == other.amount
     }
 }
@@ -53,6 +67,6 @@ mod tests {
     fn test_franc_multiptication() {
         let mut five = Franc::new(5);
         assert!(Franc::new(10).equals(five.times(2)));
-        assert!(Franc::new(15).equals(five.times(5)));
+        assert!(Franc::new(15).equals(five.times(3)));
     }
 }
