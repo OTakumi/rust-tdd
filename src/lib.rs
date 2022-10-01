@@ -48,4 +48,11 @@ mod tests {
         assert!(Doller::new(5).equals(Doller::new(5)));
         assert!(!Doller::new(5).equals(Doller::new(6)));
     }
+
+    #[test]
+    fn test_franc_multiptication() {
+        let mut five = Franc::new(5);
+        assert!(Franc::new(10).equals(five.times(2)));
+        assert!(Franc::new(15).equals(five.times(5)));
+    }
 }
