@@ -9,9 +9,7 @@ trait MoneyTrait {
 
 pub struct Doller {}
 
-struct Franc {
-    amount: u32,
-}
+pub struct Franc {}
 
 impl Money {
     /// Calculate multiplication with the entered multiples.
@@ -33,22 +31,10 @@ impl MoneyTrait for Doller {
     }
 }
 
-impl Franc {
+impl MoneyTrait for Franc {
     /// Create a Doller instance.
-    pub fn new(amount: u32) -> Franc {
-        Franc { amount }
-    }
-
-    /// Calculate multiplication with the entered multiples.
-    pub fn times(&mut self, multiplier: u32) -> Franc {
-        Franc {
-            amount: self.amount * multiplier,
-        }
-    }
-
-    /// Check the equivalent.
-    pub fn equals(&self, other: Franc) -> bool {
-        self.amount == other.amount
+    fn new(amount: u32) -> Money {
+        Money { amount }
     }
 }
 
@@ -72,8 +58,14 @@ mod tests {
 
     #[test]
     fn test_franc_multiptication() {
-        let mut five = Franc::new(5);
+        let five = Franc::new(5);
         assert!(Franc::new(10).equals(five.times(2)));
         assert!(Franc::new(15).equals(five.times(3)));
+    }
+
+    #[test]
+    fn test_franc_equality() {
+        assert!(Franc::new(5).equals(Franc::new(5)));
+        assert!(!Franc::new(5).equals(Franc::new(6)));
     }
 }
