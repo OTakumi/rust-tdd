@@ -1,3 +1,5 @@
+use std::any;
+
 #[derive(Debug)]
 pub struct Money {
     amount: u32,
@@ -54,6 +56,9 @@ mod tests {
     fn test_equality() {
         assert!(Doller::new(5).equals(Doller::new(5)));
         assert!(!Doller::new(5).equals(Doller::new(6)));
+        assert!(Franc::new(5).equals(Franc::new(5)));
+        assert!(!Franc::new(5).equals(Franc::new(6)));
+        assert!(!Franc::new(5).equals(Doller::new(5)));
     }
 
     #[test]
@@ -61,11 +66,5 @@ mod tests {
         let five = Franc::new(5);
         assert!(Franc::new(10).equals(five.times(2)));
         assert!(Franc::new(15).equals(five.times(3)));
-    }
-
-    #[test]
-    fn test_franc_equality() {
-        assert!(Franc::new(5).equals(Franc::new(5)));
-        assert!(!Franc::new(5).equals(Franc::new(6)));
     }
 }
