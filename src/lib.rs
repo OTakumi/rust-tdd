@@ -73,4 +73,10 @@ mod tests {
         assert!(Franc::new(10).equals(five.times(2)));
         assert!(Franc::new(15).equals(five.times(3)));
     }
+
+    #[test]
+    fn test_currency(){
+        assert_eq!("USD", Money::doller(1).currency()));
+        assert_eq!("CHF", Money::franc(1).currency()));
+    }
 }
