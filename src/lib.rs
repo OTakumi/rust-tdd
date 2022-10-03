@@ -1,5 +1,3 @@
-use std::any;
-
 #[derive(Debug)]
 pub struct Money {
     amount: u32,
@@ -23,6 +21,14 @@ impl Money {
     /// Check the equivalent.
     pub fn equals(&self, target: Money) -> bool {
         self.amount == target.amount
+    }
+
+    pub fn doller(amount: u32) -> Money {
+        Money { amount }
+    }
+
+    pub fn franc(amount: u32) -> Money {
+        Money { amount }
     }
 }
 
@@ -54,11 +60,11 @@ mod tests {
 
     #[test]
     fn test_equality() {
-        assert!(Doller::new(5).equals(Doller::new(5)));
-        assert!(!Doller::new(5).equals(Doller::new(6)));
-        assert!(Franc::new(5).equals(Franc::new(5)));
-        assert!(!Franc::new(5).equals(Franc::new(6)));
-        assert!(!Franc::new(5).equals(Doller::new(5)));
+        assert!(Money::doller(5).equals(Money::doller(5)));
+        assert!(!Money::doller(5).equals(Money::doller(6)));
+        assert!(Money::franc(5).equals(Money::franc(5)));
+        assert!(!Money::franc(5).equals(Money::franc(6)));
+        assert!(!Money::franc(5).equals(Money::doller(5)));
     }
 
     #[test]
