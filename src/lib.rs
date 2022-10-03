@@ -47,9 +47,9 @@ mod tests {
     #[test]
     fn test_multiplication() {
         // n倍した合計値を確認する
-        let five = Doller::new(5);
-        assert!(Doller::new(10).equals(five.times(2)));
-        assert!(Doller::new(15).equals(five.times(3)));
+        let five = Money::doller(5);
+        assert!(Money::doller(10).equals(five.times(2)));
+        assert!(Money::doller(15).equals(five.times(3)));
     }
 
     #[test]
