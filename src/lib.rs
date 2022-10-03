@@ -1,21 +1,19 @@
 #[derive(Debug)]
 pub struct Money {
     amount: u32,
+    currency: &'static str,
 }
 
 trait MoneyTrait {
     fn new(amount: u32) -> Money;
 }
 
-pub struct Doller {}
-
-pub struct Franc {}
-
 impl Money {
     /// Calculate multiplication with the entered multiples.
     pub fn times(&self, multiplier: u32) -> Money {
         Money {
             amount: self.amount * multiplier,
+            currency: &self.currency,
         }
     }
     /// Check the equivalent.
@@ -24,25 +22,21 @@ impl Money {
     }
 
     pub fn doller(amount: u32) -> Money {
-        Money { amount }
+        Money {
+            amount,
+            currency: "USD",
+        }
     }
 
     pub fn franc(amount: u32) -> Money {
-        Money { amount }
+        Money {
+            amount,
+            currency: "CHF",
+        }
     }
-}
 
-impl MoneyTrait for Doller {
-    /// Create a Doller instance.
-    fn new(amount: u32) -> Money {
-        Money { amount }
-    }
-}
-
-impl MoneyTrait for Franc {
-    /// Create a Doller instance.
-    fn new(amount: u32) -> Money {
-        Money { amount }
+    pub fn currency(&self) -> &'static str {
+        self.currency
     }
 }
 
@@ -69,14 +63,14 @@ mod tests {
 
     #[test]
     fn test_franc_multiptication() {
-        let five = Franc::new(5);
-        assert!(Franc::new(10).equals(five.times(2)));
-        assert!(Franc::new(15).equals(five.times(3)));
+        let five = Money::franc(5);
+        assert!(Money::franc(10).equals(five.times(2)));
+        assert!(Money::franc(15).equals(five.times(3)));
     }
 
     #[test]
-    fn test_currency(){
-        assert_eq!("USD", Money::doller(1).currency()));
-        assert_eq!("CHF", Money::franc(1).currency()));
+    fn test_currency() {
+        assert_eq!("USD", Money::doller(1).currency());
+        assert_eq!("CHF", Money::franc(1).currency());
     }
 }
